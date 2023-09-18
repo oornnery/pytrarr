@@ -16,4 +16,3 @@
 - [ ] Gerenciar as informações de filmes e series
 
 ## API / Backend
-

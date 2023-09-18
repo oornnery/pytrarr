@@ -5,18 +5,18 @@ site_base = [
     'https://solidtorrents.to/library/stranger-things-a30b3/6050f4750ab2df3768993cb1',
 ]
 torrent_urls = [
-    'https://torrentflix.net/',
-    'https://megatorrents.com.br/',
-    'https://megadostorrents.info/'
-    'https://filmeshdtorrent.megatorrents.info/',
-    'https://nerdfilmes.com.br/',
-    'https://gratistorrent.com/',
-    'https://capitaofilmes.com/',
-    'https://nickfilmes.net/',
-    'https://emtorrents.com/',
+    'https://torrentflix.net/', # Robot
+    'https://megatorrents.com.br/', # Robot
+    'https://megadostorrents.info/' # Robot
+    'https://filmeshdtorrent.megatorrents.info/', # Robot
+    'https://nerdfilmes.com.br/', # Link
+    'https://gratistorrent.com/', # Link
+    'https://capitaofilmes.com/', # Robot
+    'https://nickfilmes.net/', # Link
+    'https://emtorrents.com/', # Link
     'https://www.tronodotorrent.com/'
-    'https://sapotorrent.com/',
-    'https://flixtorrentx.org/'
+    'https://sapotorrent.com/', # Link
+    'https://flixtorrentx.org/' # Robot
     'https://1337x.to/home/',
     # Anime
     'https://www.skyanimeshd.site/',
