@@ -1,65 +1,22 @@
 import sqlite3
 
-# Criação da tabela para filmes
-def create_movies_table():
-    conn = sqlite3.connect("media_database.db")
+from dataclasses import asdict
+from pytrarr.utils.dataclass import MediaContent
+
+
+# Insere os dados no banco de dados SQLite
+def add_content_in_database(media_content: MediaContent):
+    conn = sqlite3.connect("database.db")
     cursor = conn.cursor()
 
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS movies (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT,
-            poster TEXT,
-            release_date TEXT,
-            uploaded TEXT,
-            genres TEXT,
-            languages TEXT,
-            duration TEXT,
-            quality TEXT,
-            audio TEXT,
-            video TEXT,
-            format TEXT,
-            size TEXT,
-            subtitles TEXT,
-            imdb TEXT,
-            last_update TEXT
-        )
-    ''')
-
+    # Converta o objeto (por exemplo, Movie) para um dicionário antes de inserir no banco de dados
+    item_dict = asdict(media_content)
+    
+    # Insira os dados no banco de dados SQLite
+    # Substitua esta parte com sua lógica de inserção real
+    cursor.execute("INSERT INTO media_content (...) VALUES (...)")  # Exemplo para filmes
+            
     conn.commit()
     conn.close()
 
-# Criação da tabela para séries
-def create_series_table():
-    conn = sqlite3.connect("media_database.db")
-    cursor = conn.cursor()
 
-    cursor.execute('''
-        CREATE TABLE IF NOT EXISTS series (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            title TEXT,
-            poster TEXT,
-            release_date TEXT,
-            uploaded TEXT,
-            genres TEXT,
-            languages TEXT,
-            duration TEXT,
-            quality TEXT,
-            audio TEXT,
-            video TEXT,
-            format TEXT,
-            size TEXT,
-            subtitles TEXT,
-            imdb TEXT,
-            last_update TEXT
-        )
-    ''')
-
-    conn.commit()
-    conn.close()
-
-# Execute as funções de criação das tabelas
-if __name__ == "__main__":
-    create_movies_table()
-    create_series_table()
-    # Adicione chamadas para criar tabelas para outras categorias (novela, anime, música, ebook) da mesma maneira

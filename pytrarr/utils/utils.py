@@ -6,7 +6,6 @@ site_base = [
 ]
 torrent_urls = [
     'https://torrentflix.net/',
-    'https://1337x.to/home/',
     'https://megatorrents.com.br/',
     'https://megadostorrents.info/'
     'https://filmeshdtorrent.megatorrents.info/',
@@ -18,6 +17,7 @@ torrent_urls = [
     'https://www.tronodotorrent.com/'
     'https://sapotorrent.com/',
     'https://flixtorrentx.org/'
+    'https://1337x.to/home/',
     # Anime
     'https://www.skyanimeshd.site/',
     'https://darkmahou.org/',

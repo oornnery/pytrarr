@@ -5,9 +5,12 @@ from templates import (
     add_result_item
 )
 
-from router import (
-    search,
-)
+# from router import (
+#     search,
+# )
+
+from pytrarr.api import api
+
 
 URL_BASE = "http://localhost:8080/api/"
 
@@ -34,7 +37,6 @@ dark = ui.dark_mode(value=True, on_change=lambda: dark.enable)
 @ui.page('/')
 @ui.page('/home')
 def page_home():
-
     # header
     with ui.header(elevated=True).classes('items-center'):
             # ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')

@@ -12,6 +12,7 @@ fastapi = "^0.103.1"
 httpx = "<0.25.0"
 parsel = "^1.8.1"
 justwatch = "^0.5.1"
+cloudscraper = "^1.2.71"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.5.2"
