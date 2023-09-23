@@ -8,7 +8,6 @@ console = Console()
 
 @app.get('/api/search/{search}', status_code=200)
 def search(search: str):
-
     just_watch = JustWatch(country='BR')
     if search:
         return just_watch.search_for_item(search)

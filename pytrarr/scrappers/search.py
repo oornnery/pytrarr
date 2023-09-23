@@ -116,7 +116,6 @@ async def searchTorrentFlix(
         console.print(len(result))
 
 
-
 async def searchMegatorrent(query="", page=1):
     async with AsyncClient() as client:
         result = []

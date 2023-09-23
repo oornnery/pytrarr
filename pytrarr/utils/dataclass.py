@@ -3,19 +3,7 @@ from email import message
 from pydantic import BaseModel
 from typing import List
 
-@dataclass
-class SearchTorrent:
-    title: str
-    original_title: str
-    year: str
-    genres: list[str]
-    language: list[str]
-    subtitles: list[str]
-    video_format: str
-    video_quality: str
-    video_size: str
-    duration: str
-    torrent: str
+
 
 @dataclass
 class Torrent:
@@ -59,6 +47,20 @@ class MediaContent:
     last_update: str = field(default_factory=str)
     seasons: List[Season] = field(default_factory=list)
     links: List[Torrent] = field(default_factory=list)
+
+
+@dataclass
+class Gender:
+    id: int
+    short_name: str
+    technical_name: str
+    translation: str
+    slug: str
+
+
+@dataclass
+class Genres:
+    genres: List[Gender]
 
 
 @dataclass
