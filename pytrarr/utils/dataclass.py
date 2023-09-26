@@ -1,9 +1,32 @@
 from dataclasses import dataclass, field
 from email import message
 from pydantic import BaseModel
-from typing import List
+from typing import List, Dict
+
+### JUST WATCH API ###
+
+@dataclass
+class LocalesInfo:
+    full_locale: str
+    iso_3166_2: str
+    country: str
+    i18n_state: str
+    exposed_url_part: str
+    currency: str
+    currency_name: str
+    country_names: Dict[str, str]
+    timezone: str
+    timezone_offset: int
+    timezone_abbreviation: str
+
+@dataclass
+class Locales:
+    locales: List[LocalesInfo]
 
 
+####################################################
+####################################################
+####################################################
 
 @dataclass
 class Torrent:
@@ -50,17 +73,12 @@ class MediaContent:
 
 
 @dataclass
-class Gender:
+class Genres:
     id: int
     short_name: str
     technical_name: str
     translation: str
     slug: str
-
-
-@dataclass
-class Genres:
-    genres: List[Gender]
 
 
 @dataclass
@@ -84,8 +102,3 @@ class MediaType(BaseModel):
     media_type: list[str]
 
 
-from rich.console import Console
-
-console = Console()
-
-console.print(MediaContent())

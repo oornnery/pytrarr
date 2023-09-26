@@ -2,6 +2,8 @@ import profile
 from nicegui import app
 from justwatch import JustWatch
 
+from httpx import AsyncClient
+
 from rich.console import Console
 
 console = Console()
@@ -39,3 +41,10 @@ def search(search: str):
             }
         ]
     }
+
+@app.get('/api/content/genres/{locale}', status_code=200)
+async def genres(locale: str):
+    async with AsyncClient() as client:
+        response = await client.get(f'https://api.justwatch.com/content/genres/locale/{locale}')
+        response.raise_for_status()
+        return response.json()
