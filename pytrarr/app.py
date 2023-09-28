@@ -5,35 +5,32 @@ from templates import (
     add_result_item
 )
 
-from pytrarr.utils.utils import (
-    JustWatch
+
+from router import (
+    search,
 )
 
-# from router import (
-#     search,
-# )
 
-import pytrarr.router
-
-
-jw = JustWatch('BR')
 
 URL_BASE = "http://localhost:8080/api"
 
-async def search_submit(slot: ui.grid, input: ui.input):
-    if input.value == '':
+async def search_submit(slot: ui.grid, query: str):
+    if query == '':
         return ui.notify("Error: Input cannot be empty", position='top-right', color='red')
     
-    async with AsyncClient() as client:
-        search = await client.get(URL_BASE + 'search/' + input.value)
-    
+    async with AsyncClient(follow_redirects=True) as client:
+        search = await client.get(URL_BASE + '/search', params={'s': query})
+        print(search.url)
     if search.status_code != 200:
         return ui.notify(f"Error: {search.status_code}", position='top-right', color='red')
+    
     slot.visible = True
     slot.clear()
+    
     with slot:
-        for x in search.json():
+        for x in search.json()['result']:
             add_result_item(x)
+
     input.set_value("")    
 
 
@@ -47,8 +44,7 @@ async def page_home():
     ### Header ###
     ##############
     #TODO: Add dark mode
-    #TODO: Add Nav Pages
-    await jw.set_locale()
+    #TODO: Add Nav Page
     
     with ui.header(add_scroll_padding=True).classes('items-center'):
             # ui.button(on_click=lambda: left_drawer.toggle(), icon='menu').props('flat color=white')
@@ -68,49 +64,62 @@ async def page_home():
     # TODO: Add List
     # TODO: Add Footer
     
-    with ui.row().classes(
-        'bg-gray-100 p-4 w-full h-full flex flex-col items-center justify-center'
+    with ui.column().classes(
+        'bg-gray-100 p-4 w-full h-full items-center justify-center'
         ) as main:
         
         ### TITLE ###
-        with ui.row():
+        with ui.row() as title:
             ui.label('Media Search').classes(
                 'text-4xl font-mono-semibold'
             )
 
         ### INPUT ###
-        with ui.row().classes('m-3') as search:
+        with ui.column().classes('items-center justify-center') as search:
             with ui.row().classes(
-                'relative mb-4 flex w-full flex-wrap items-stretch'
+                'mb-4'
             ):
                 input = ui.input('Search', placeholder='Search').classes(
-                    'relative m-0 w-96 min-w-0 block flex-auto rounded-l \
-                    border border-solid border-neutral-300 \
-                    bg-transparent bg-clip-padding px-3 py-[0.25rem] \
-                    text-base font-normal leading-[1.6] text-neutral-700 \
-                    outline-none transition duration-200 ease-in-out focus:z-[3] \
-                    focus:border-primary focus:text-neutral-700 \
-                    focus:shadow-[inset_0_0_0_1px_rgb(59,113,202)] \
-                    focus:outline-none dark:border-neutral-600 dark:text-neutral-200 \
-                    dark:placeholder:text-neutral-200 dark:focus:border-primary'
+                    'w-96'
+                ).on(
+                    'keydown.enter', lambda: search_submit(search_content, input.value)
                 )
-                ui.button(icon='search',on_click=lambda: search_submit(search_content, input)).classes(
-                    'relative z-[2] flex items-center rounded-r bg-primary px-6 py-2.5 text-xs font-medium uppercase leading-tight text-white shadow-md transition duration-150 ease-in-out hover:bg-primary-700 hover:shadow-lg focus:bg-primary-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-primary-800 active:shadow-lg'
+                ui.button(icon='search',on_click=lambda: search_submit(search_content, input.value)).classes(
+                    'w-20 my-4'
                 )
 
-            with ui.row().classes('w-full flex-1') as filters:
-                genres = await jw.get_genres()
-                ui.select(
-                    options=[gen.translation for gen in genres],
-                    label='Category', 
-                    with_input=True, 
-                    multiple=True, 
-                    clearable=True,
-                    on_change=lambda e: print(e.value)
-                ).classes(
-                    'w-36 h-4'
-                )
-        with ui.grid(columns=4).classes('w-full h-100 rounded-md bg-gray-100') as search_content:
+            with ui.row().classes() as filters:
+                genres = []
+                for _ in range(0,3):
+                    with ui.column().classes('items-left justify-center'):
+                        ui.label('Category').classes('m-0 p-0 text-end text-gray-')
+                        ui.select(
+                            options=[
+                                'All', 
+                                'Action', 
+                                'Adventure', 
+                                'Animation', 
+                                'Comedy', 
+                                'Crime', 
+                                'Drama', 
+                                'Fantasy', 
+                                'Horror', 
+                                'Mystery', 
+                                'Romance', 
+                                'Sci-Fi', 
+                                'Thriller', 
+                                'War', 
+                                'Western'
+                            ],
+                            with_input=False, 
+                            multiple=True, 
+                            clearable=True,
+                            on_change=lambda e: print(e.value)
+                        ).classes(
+                            'w-40 h-10 truncate pl-1 text-center text-gray-500 border border-gray-300 rounded-md'
+                        )
+        search_content = ui.grid(columns=4).classes('w-full h-100 rounded-md bg-gray-100')
+        with search_content:
             search_content.visible = True
 
 
