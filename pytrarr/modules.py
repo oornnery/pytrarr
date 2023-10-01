@@ -3,6 +3,9 @@ from rich.console import Console
 
 console = Console()
 
+class SearchTorrent:
+    ...
+
 class TMDB():
     API_KEY = 'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI2NzQwY2NjMjRlYjlkMzQ5NjJmNWQyMjM0MTBmZDEzYyIsInN1YiI6IjY1MTVhZGZhMDQ5OWYyMDBlMWM2N2U1ZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.VaPVndSOWt8LtDjJBp_QteXTVowBuklQCpNgjGJ3KZY'
     URL_BASE = "https://api.themoviedb.org/3"
@@ -34,7 +37,7 @@ class TMDB():
     async def search(self, 
         query: str,
         page: int = 1,
-        ):
+        ) -> dict:
         path = '/search/multi'
         params = {
             'query': query,
@@ -52,7 +55,7 @@ class TMDB():
         primary_release_year: str = '',
         year: str = '',
         page: int = 1,
-        ):
+        ) -> dict:
         path = '/search/multi'
         params = {
             'query': query,
@@ -72,7 +75,7 @@ class TMDB():
         first_air_date_year: str = '',
         year: str = '',
         page: int = 1,
-        ):
+        ) -> dict:
         path = '/search/multi'
         params = {
             'query': query,

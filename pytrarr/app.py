@@ -1,13 +1,10 @@
 from nicegui import ui
 from nicegui.events import KeyEventArguments
-from httpx import AsyncClient
+
+
+from modules import TMDB
 from templates import (
     add_result_item
-)
-
-
-from router import (
-    search,
 )
 
 
@@ -18,17 +15,15 @@ async def search_submit(slot: ui.grid, query: str):
     if query == '':
         return ui.notify("Error: Input cannot be empty", position='top-right', color='red')
     
-    async with AsyncClient(follow_redirects=True) as client:
-        search = await client.get(URL_BASE + '/search', params={'s': query})
-        print(search.url)
-    if search.status_code != 200:
-        return ui.notify(f"Error: {search.status_code}", position='top-right', color='red')
+    db = TMDB()
+    
+    r = await db.search(query)
     
     slot.visible = True
     slot.clear()
     
     with slot:
-        for x in search.json()['result']:
+        for x in r.get('results', {}):
             add_result_item(x)
 
     input.set_value("")    
@@ -56,13 +51,6 @@ async def page_home():
     ### Body ###
     ############
     
-    # TODO: Add Title
-    # TODO: Add search
-    # TODO: Add Filters
-    # TODO: Add Section result
-    # TODO: Add Cards
-    # TODO: Add List
-    # TODO: Add Footer
     
     with ui.column().classes(
         'bg-gray-100 p-4 w-full h-full items-center justify-center'
