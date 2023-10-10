@@ -18,6 +18,7 @@ cinemagoer = "^2023.5.1"
 [tool.poetry.group.dev.dependencies]
 mkdocs = "^1.5.2"
 rich = "^13.5.3"
+faker = "^19.6.2"
 
 [build-system]
 requires = ["poetry-core"]

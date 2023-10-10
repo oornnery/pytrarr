@@ -28,35 +28,12 @@ def search(s: str):
             'error': e,
             'result': []
         }
+
+@app.get('/api/torrents', status_code=200)
+def search_torrent(name: str = '', moveId: str = '', years: str = '', temp: str = '', page: str = ''):
+    ...
     
-    
-    # return {
-    #     'search': search, 
-    #     'status': 200,
-    #     'result': [
-    #         {
-    #             'title': 'Title 1',
-    #             'subtitle': 'Subtitle 1'
-    #         },
-    #         {
-    #             'title': 'Title 2',
-    #             'subtitle': 'Subtitle 2'
-                
-    #         },
-    #         {
-    #             'title': 'Title 3',
-    #             'subtitle': 'Subtitle 3'
-    #         },
-    #         {
-    #             'title': 'Title 4',
-    #             'subtitle': 'Subtitle 4'
-    #         },
-    #         {
-    #             'title': 'Title 5',
-    #             'subtitle': 'Subtitle 5'
-    #         }
-    #     ]
-    # }
+
 
 @app.get('/api/content/genres/{locale}', status_code=200)
 async def genres(locale: str):

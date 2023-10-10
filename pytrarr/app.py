@@ -2,7 +2,7 @@ from nicegui import ui
 from nicegui.events import KeyEventArguments
 
 
-from modules import TMDB
+from pytrarr.modules.modules import TMDB
 from templates import *
 
 

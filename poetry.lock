@@ -376,6 +376,20 @@ files = [
 ]
 
 [[package]]
+name = "faker"
+version = "19.6.2"
+description = "Faker is a Python package that generates fake data for you."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "Faker-19.6.2-py3-none-any.whl", hash = "sha256:8fba91068dc26e3159c1ac9f22444a2338704b0991d86605322e454bda420092"},
+    {file = "Faker-19.6.2.tar.gz", hash = "sha256:d5d5953556b0fb428a46019e03fc2d40eab2980135ddef5a9eb3d054947fdf83"},
+]
+
+[package.dependencies]
+python-dateutil = ">=2.4"
+
+[[package]]
 name = "fastapi"
 version = "0.103.1"
 description = "FastAPI framework, high performance, easy to learn, fast to code, ready for production"
@@ -2158,4 +2172,4 @@ multidict = ">=4.0"
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "fe7a7a6bff6b5b524df1a2e82d43054e08832c8da766044f8ab56cb8ccffcf48"
+content-hash = "7c6d3190b34a12f6629e461546c17195c7d3146bc0e9faa1c4c2a1807893e779"
